@@ -23,6 +23,8 @@
 
 #pragma comment( lib, "libmingwex.a" )
 #pragma comment( lib, "libgcc.a" )
+#pragma comment( lib, "libgcc_s.a" )
+//#pragma comment( lib, "libgcc_eh.a" )
 #pragma comment( lib, "libz.a" )
 #pragma comment( lib, "libbz2.a" )
 #pragma comment( lib, "liblsmash.a" )
@@ -32,5 +34,13 @@
 #pragma comment( lib, "libswscale.a" )
 #pragma comment( lib, "libavresample.a" )
 #pragma comment( lib, "libwsock32.a" )
+//#pragma comment( lib, "libstdc++.a" )
+#pragma comment( lib, "libstdc++.dll.a" )
+#pragma comment( lib, "libsupc++.a" )
+
+#pragma comment( lib, "libmfx.a" )
+#pragma comment( lib, "libmingwthrd.a" )
+//#pragma comment( lib, "libpthread.a" )
+#pragma comment( lib, "libadvapi32.a" )
 
 /* Add more external libraries user-self if needed. */

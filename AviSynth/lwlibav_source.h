@@ -52,6 +52,7 @@ public:
         int                 direct_rendering,
         int                 stacked_format,
         enum AVPixelFormat  pixel_format,
+        const char         *forced_codec_name,
         IScriptEnvironment *env
     );
     ~LWLibavVideoSource();

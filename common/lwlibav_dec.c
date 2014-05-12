@@ -88,7 +88,11 @@ void lwlibav_update_configuration
     /* Find an appropriate decoder. */
     char error_string[96] = { 0 };
     lwlibav_extradata_t *entry = &exhp->entries[extradata_index];
-    const AVCodec *codec = avcodec_find_decoder( entry->codec_id );
+    const AVCodec *codec = NULL;
+    if( dhp->forced_codec_name )
+        codec = avcodec_find_decoder_by_name( dhp->forced_codec_name );
+    if( !codec || (codec && codec->id != entry->codec_id) )
+        codec = avcodec_find_decoder( entry->codec_id );
     if( !codec )
     {
         strcpy( error_string, "Failed to find the decoder.\n" );

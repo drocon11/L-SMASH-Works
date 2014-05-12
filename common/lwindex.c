@@ -1578,7 +1578,7 @@ static void create_index
             continue;
         if( pkt_ctx->codec_id == AV_CODEC_ID_NONE )
             continue;
-        if( !av_codec_is_decoder( pkt_ctx->codec ) && open_decoder( pkt_ctx, pkt_ctx->codec_id, lwhp->threads ) )
+        if( !av_codec_is_decoder( pkt_ctx->codec ) && open_decoder( pkt_ctx, pkt_ctx->codec_id, vdhp->forced_codec_name, lwhp->threads ) )
             continue;
         lwindex_helper_t *helper = get_index_helper( lwhp->format_name, pkt_ctx, stream );
         if( !helper )

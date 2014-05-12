@@ -382,7 +382,12 @@ AVCodec *libavsmash_find_decoder
             codec_id = get_codec_id_from_description( config->entries[i].summary );
         config->ctx->codec_id = codec_id;
     }
-    return avcodec_find_decoder( codec_id );
+    AVCodec *codec = NULL;
+    if( config->forced_codec_name )
+        codec = avcodec_find_decoder_by_name( config->forced_codec_name );
+    if( !codec || (codec && codec->id != codec_id) )
+        codec = avcodec_find_decoder( codec_id );
+    return codec;
 }
 
 static lsmash_codec_specific_data_type get_codec_specific_data_type
@@ -767,7 +772,7 @@ void update_configuration
         return;
     }
     AVCodecContext *ctx   = config->ctx;
-    const AVCodec  *codec = ctx->codec;
+    const AVCodec  *codec = NULL;
     void *app_specific      = ctx->opaque;
     int   refcounted_frames = ctx->refcounted_frames;
     avcodec_close( ctx );
@@ -778,7 +783,10 @@ void update_configuration
     }
     /* Find an appropriate decoder. */
     char error_string[96] = { 0 };
-    codec = avcodec_find_decoder( config->queue.codec_id );
+    if( config->forced_codec_name )
+        codec = avcodec_find_decoder_by_name( config->forced_codec_name );
+    if( !codec || (codec && codec->id != config->queue.codec_id) )
+        codec = avcodec_find_decoder( config->queue.codec_id );
     if( !codec )
     {
         strcpy( error_string, "Failed to find the decoder.\n" );

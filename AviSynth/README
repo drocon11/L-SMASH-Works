@@ -5,7 +5,7 @@
     [Functions]
         [LSMASHVideoSource]
             LSMASHVideoSource(string source, int track = 0, int threads = 0, int seek_mode = 0, int seek_threshold = 10,
-                              bool dr = false, bool stacked = false, string format = "")
+                              bool dr = false, bool stacked = false, string format = "", string codec = "")
                 * This function uses libavcodec as video decoder and L-SMASH as demuxer.
                 * RAP is an abbreviation of random accessible point.
             [Arguments]
@@ -74,6 +74,8 @@
                         "YUY2"
                         "RGB24"
                     Note: direct rendering is not available at all if pixel format is forced.
+                + codec (default : "")
+                    Force specified decode codec if 'codec' is specified.
         [LSMASHAudioSource]
             LSMASHAudioSource(string source, int track = 0, bool skip_priming = true, string layout = "", int rate = 0)
                 * This function uses libavcodec as audio decoder and L-SMASH as demuxer.
@@ -163,7 +165,7 @@
         [LWLibavVideoSource]
             LWLibavVideoSource(string source, int stream_index = -1, int threads = 0, bool cache = true,
                                int seek_mode = 0, int seek_threshold = 10, bool dr = false,
-                               bool repeat = false, int dominance = 0, bool stacked = false, string format = "")
+                               bool repeat = false, int dominance = 0, bool stacked = false, string format = "", string codec = "")
                 * This function uses libavcodec as video decoder and libavformat as demuxer.
             [Arguments]
                 + source
@@ -197,6 +199,8 @@
                     Same as 'stacked' of LSMASHVideoSource().
                 + format (default : "")
                     Same as 'format' of LSMASHVideoSource().
+                + codec (default : "")
+                    Same as 'codec' of LSMASHVideoSource().
         [LWLibavAudioSource]
             LWLibavAudioSource(string source, int stream_index = -1, bool cache = true, bool av_sync = false, string layout = "", int rate = 0)
                 * This function uses libavcodec as audio decoder and libavformat as demuxer.
